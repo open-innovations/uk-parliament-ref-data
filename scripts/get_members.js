@@ -21,10 +21,12 @@ async function callMembersApi(skip = 0) {
   const result = await response.json(); // For JSON Response
 
   const summary = result.items.map(member => ({
-    id: member.value.id,
-    name: member.value.nameDisplayAs,
-    pcon: member.value.latestHouseMembership.membershipFrom,
-    pconId: member.value.latestHouseMembership.membershipFromId
+    member_id: member.value.id,
+    member_name: member.value.nameDisplayAs,
+    pcon_id: member.value.latestHouseMembership.membershipFromId,
+    pcon_name: member.value.latestHouseMembership.membershipFrom,
+    party_short_name: member.value.latestParty.abbreviation,
+    party_name: member.value.latestParty.name,
   }));
 
   const next = new URL(result.links.find(x => x.rel === 'page.next').href, url).searchParams.get('skip');
